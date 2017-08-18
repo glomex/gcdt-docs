@@ -5,7 +5,6 @@
 # Documentation for gcdt
 
 author: glomex SRE Team
-gcdt: https://github.com/glomex/gcdt
 
 We needed to ease writing and improving gcdt documentation. For this we moved all documentation into this repository. No pull-request, build, merge etc. necessary. Best is to just open the file in github and document away.  
 
