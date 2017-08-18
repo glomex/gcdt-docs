@@ -187,6 +187,11 @@ You need to install gcdt-tools (gcdt-kumo, gcdt-tenkai, gcdt-ramuda, gcdt-yugen)
 Newer glomex `base_ami` uses a different naming scheme. Consequently the ami lookup implemented in gcdt provides you with old base_ami ids. Current working mode is to put the ami id into credstash (key: 'ops.dev.base_ami').
 
 
+##### with v 0.2.x we moved cloudformation helpers to gcdt_kumo
+
+If you use `servicediscovery`, `iam`, and `route53` helpers you need to change imports to `gcdt_kumo`.
+
+
 #### Updating gcdt from 0.0.x to 0.1.x
 
 Initially gcdt was a "monolithic" application. We wanted to a plugin mechanism that gives us a little bit more flexibility so we can install `generators` (scaffolding), `plugins`, and `tools` as needed. With 0.1.x versions you need to maintain a `requirements_gcdt.txt` file for you project in order to define which plugins and tools you want to use (see installation section above). 

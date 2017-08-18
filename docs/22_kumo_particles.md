@@ -72,7 +72,7 @@ will create or update a CloudFormation stack
 With kumo particles you can import particles from multiple sources:
 
 ``` python
-from gcdt import kumo_particle_helper as ph
+from gcdt_kumo import kumo_particle_helper as ph
 import eventbus_particle as eb
 import reusable_particles as rp
 ```
