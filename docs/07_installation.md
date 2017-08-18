@@ -189,7 +189,7 @@ Newer glomex `base_ami` uses a different naming scheme. Consequently the ami loo
 
 ##### with v 0.2.x we moved cloudformation helpers to gcdt_kumo
 
-If you use `servicediscovery`, `iam`, and `route53` helpers you need to change imports to `gcdt_kumo`.
+If you use `iam` and `route53` helpers you need to change imports for these submodules from `gcdt` to `gcdt_kumo`.
 
 
 #### Updating gcdt from 0.0.x to 0.1.x
