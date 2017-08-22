@@ -11,14 +11,18 @@
 To see available commands, call this:
 ```bash
 Usage:
-        yugen deploy
-        yugen delete -f
-        yugen export
-        yugen list
-        yugen apikey-create <keyname>
-        yugen apikey-list
-        yugen apikey-delete
+        yugen deploy [-v]
+        yugen delete -f [-v]
+        yugen export [-v]
+        yugen list [-v]
+        yugen apikey-create <keyname> [-v]
+        yugen apikey-list [-v]
+        yugen apikey-delete [-v]
+        yugen custom-domain-create [-v]
         yugen version
+
+-h --help           show this
+-v --verbose        show debug messages
 ```
 
 #### deploy
@@ -87,6 +91,12 @@ Set the config attribute `cacheClusterEnabled` to `true` in your gcdt_<env>.json
 Set the config attribute `cacheClusterSize` to '0.5'|'1.6'|'6.1'|'13.5'|'28.4'|'58.2'|'118'|'237' in your gcdt_<env>.json config file to configure the size for an enabled cache cluster. Default setting is '0.5'.
 
 The config attribute `methodSettings` allows you to define settings related to a setting_key. A `setting_key` is defined as <resource_path>/<http_method>. So it is important that your setting_key contains the http_method (GET, PUT, OPTIONS, etc.), too. You can specify method setting properties as defined in the AWS docs: https://botocore.readthedocs.io/en/latest/reference/services/apigateway.html#APIGateway.Client.update_stage like for example 'cachingEnabled', 'loggingLevel', etc.
+
+
+#### Create custom domain
+
+Currently the certificates need to be deployed in `us-east-1` and used in the `certificateArn`.
+If you use ACM lookup (gcdt-lookups) to lookup your certificate arn for yugen it does that already.
 
 
 #### Setting the ENV variable
