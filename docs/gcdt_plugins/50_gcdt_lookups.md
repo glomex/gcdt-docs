@@ -16,14 +16,14 @@ format: `lookup:stack:<stackname>:<output>`
 sample: `lookup:secret:slack.token`
 
 
-### lookup ssl certificate
+### DEPRECATED lookup ssl certificate
 
 format: `lookup:ssl:<stackname>:<output>`
 sample: `lookup:ssl:*.infra.glomex.cloud`
 
 'ssl' lookup uses the `server_certificate` functionality built into AWS IAM. It is configured default lookup so for each stack also the certificates are added to stackdata.
 
-If possible, please use the new acm lookup!
+This is DEPRECATED! If possible, please use the acm lookup!
 
 
 ### lookup acm certificate
@@ -42,6 +42,8 @@ Features of the `acm lookup`:
 * return the ARN of the certificate
 * wildcards for hosted zone are expressed with "*."
 * 'ERROR' in case a certificate matching the specified list of names can not be found
+
+Note: if you use ACM lookup in yugen / API Gateway you need to deploy the certificates to the `us-east-1` region.
 
 
 ### lookup secret

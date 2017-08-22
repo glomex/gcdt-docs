@@ -95,8 +95,18 @@ The config attribute `methodSettings` allows you to define settings related to a
 
 #### Create custom domain
 
-Currently the certificates need to be deployed in `us-east-1` and used in the `certificateArn`.
-If you use ACM lookup (gcdt-lookups) to lookup your certificate arn for yugen it does that already.
+Currently the certificates need to be deployed in `us-east-1` and used in the `certificateArn` in the `customDomain` section. If you use ACM lookup (gcdt-lookups) to lookup your certificate arn for yugen it uses `us-east-1` already.
+
+``` js
+"customDomain": {
+  "basePath": "",
+  "certificateName": "wildcard.glomex.com-2017-3-2",
+  "certificateArn": "lookup:acm:*.infra.glomex.cloud",
+  "domainName": "unittest-gcdt-sample-api-dev-eu-west-1.dev.mes.glomex.cloud",
+  "hostedDomainZoneId": "lookup:stack:infra-dev:internalDomainHostedZoneID",
+  "route53Record": "unittest-gcdt-sample-api-dev-eu-west-1.dev.infra.glomex.cloud"
+}
+```
 
 
 #### Setting the ENV variable
