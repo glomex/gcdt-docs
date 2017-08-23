@@ -299,13 +299,20 @@ texinfo_documents = [
 #texinfo_no_detailmenu = False
 
 # Markdown support
-
 from recommonmark.parser import CommonMarkParser
 
 # The suffix of source filenames.
 source_suffix = ['.rst', '.md']
 
 source_parsers = {
-	'.md': CommonMarkParser,
+    '.md': CommonMarkParser,
 }
 
+
+# generate gcdt config documentation from openapi specs
+# you need to import the packages in requirements_docs.txt
+# and include the generated rst files in index.rst
+sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
+import openapi2rst
+gcdt_packages = ['gcdt_kumo', 'gcdt_tenkai', 'gcdt_ramuda', 'gcdt_yugen']
+openapi2rst.generate_docs(gcdt_packages)
