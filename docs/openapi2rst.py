@@ -40,7 +40,7 @@ def generate_docs(packages):
             doc = pkg.read_openapi()
             swagger_doc = rst.SwaggerObject(doc, examples=examples)
             rst_doc = template.render(doc=swagger_doc, inline=inline)
-        except (ConverterError, TemplateError) as err:
+        except (ConverterError, TemplateError, ImportError) as err:
             status = err
             if isinstance(err, TemplateError):
                 status = 'Template Error: {}'.format(err)
