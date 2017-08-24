@@ -72,7 +72,7 @@ language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ['_build', 'openapi_templates', 'swg2rst']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -314,5 +314,10 @@ source_parsers = {
 # and include the generated rst files in index.rst
 sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
 import openapi2rst
-gcdt_packages = ['gcdt_kumo', 'gcdt_tenkai', 'gcdt_ramuda', 'gcdt_yugen']
-openapi2rst.generate_docs(gcdt_packages)
+gcdt_tools = ['gcdt_kumo', 'gcdt_tenkai', 'gcdt_ramuda', 'gcdt_yugen']
+gcdt_plugins = ['gcdt_lookups', 'gcdt_slack_integration', 'gcdt_datadog_integration']
+openapi2rst.generate_docs(gcdt_tools)
+openapi2rst.generate_docs(gcdt_plugins, 'gcdt_plugins')
+
+
+# TODO get CHANGELOG from gcdt

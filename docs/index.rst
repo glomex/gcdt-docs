@@ -22,4 +22,3 @@ glomex-cloud-deployment-tools
    60_faq
    CHANGELOG
    70_development
-   80_gcdt_api

@@ -33,21 +33,24 @@ examples = None
 template = prepare_template('openapi_templates/main.rst', rst)
 
 
-def generate_docs(packages):
+def generate_docs(packages, subfolder=None):
     for package in packages:
+        print('generating openapi docs for \'%s\' package.' % package)
         try:
             pkg = __import__(package)  # dynamically import package
             doc = pkg.read_openapi()
             swagger_doc = rst.SwaggerObject(doc, examples=examples)
             rst_doc = template.render(doc=swagger_doc, inline=inline)
-        except (ConverterError, TemplateError, ImportError) as err:
-            status = err
-            if isinstance(err, TemplateError):
-                status = 'Template Error: {}'.format(err)
+        except (ConverterError, ImportError, AttributeError) as err:
+            print(err)
+            continue
+        except TemplateError as err:
+            status = 'Template Error: {}'.format(err)
             print(status)
-            #sys.exit(status)
             continue
 
         output = '%s_config.rst' % package
+        if subfolder:
+            output = os.path.join(subfolder, output)
         with codecs.open(output, mode='w', encoding='utf-8') as f:
             f.write(rst_doc)
