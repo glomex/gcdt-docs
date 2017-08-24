@@ -117,7 +117,7 @@ Let's create a simple `gcdts_dev.json`*(please change all values according your 
       "ScaleMaxCapacity": "1",
       "InstanceType": "t2.micro",
       "DefaultInstancePolicyARN": "lookup:stack:<stack-name>:DefaultInstancePolicyARN",
-      "AMI": "lookup:baseami"
+      "AMI": "lookup:secret:ops.prod.base_ami"
     }
   }
 }
