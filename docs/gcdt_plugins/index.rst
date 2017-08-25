@@ -10,7 +10,7 @@ Plugins for gcdt
    20_context_and_config
    38_gcdt_config_reader
    50_gcdt_lookups
-   gcdt_lookup_configuration
+   gcdt_lookups_config
    55_gcdt_bundler
    60_gcdt_say_hello
    70_gcdt_slack_integration
