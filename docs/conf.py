@@ -14,6 +14,8 @@
 
 import sys
 import os
+import recommonmark
+from recommonmark.transform import AutoStructify
 
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -321,3 +323,12 @@ openapi2rst.generate_docs(gcdt_plugins, 'gcdt_plugins')
 
 
 # TODO get CHANGELOG from gcdt
+
+
+# add config for recommonmark
+# https://recommonmark.readthedocs.io/en/latest/
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+        'enable_eval_rst': True,
+    }, True)
+    app.add_transform(AutoStructify)

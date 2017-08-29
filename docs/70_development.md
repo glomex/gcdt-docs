@@ -136,6 +136,38 @@ We used the sphinx-apidoc tool to create the skeleton (80_gcdt_api.rst) for gcdt
 $ sphinx-apidoc -F -o apidocs gcdt
 ```
 
+### Implementation details
+This section is used to document gcdt implementation for gcdt developers and maintainers.
+
+#### configuration
+
+note: gcdt design has a section on openapi, too
+
+configuration in gcdt is implemented in a few places:
+ 
+* openapi functionality in gcdt (in 'gcdt/gcdt_openapi.py')
+* openapi based validation for each tool (in 'gcdt_<tool>/openapi_<tool>.yaml' and 'gcdt_<tool>/plugin.py')
+* the functionality to [create docs from openapi specs](https://github.com/glomex/gcdt-docs/blob/develop/docs/openapi2rst.py)
+
+```eval_rst
++--------------------+-----------------------+-----------------+-----------------+ 
+| actual tool config | actual command        | need to run     | need to run     |
++--------------------+-----------------------+-----------------+-----------------+ 
+| via config-reader  | is non-config-command | incept_defaults | validate_config | 
++====================+=======================+=================+=================+ 
+| yes                | yes                   | yes             | yes             |
++--------------------+-----------------------+-----------------+-----------------+ 
+| yes                | no                    | yes             | yes             |
++--------------------+-----------------------+-----------------+-----------------+ 
+| no                 | yes                   | yes *)          | no              |
++--------------------+-----------------------+-----------------+-----------------+ 
+| no                 | no                    | no              | no              |
++--------------------+-----------------------+-----------------+-----------------+ 
+```
+
+*) The above table shows that there is a case where we run a `non-config-command` and do not have configuration from the config reader. In this case we still need the defaults but the defaults alone might not be a valid configuration. To make this case work the `incept-defaults` functionality needs to disable the config validation for the impacted configuration part. 
+
+
 ### gcdt design
 
 #### Design Goals
@@ -280,6 +312,6 @@ A wide area of gcdt functionality is related to configuration:
 * validation of configuration
 * scaffolding of minimal (required properties) configuration
 * sample of complete configuration
-* documentation of configuration including examples
+* documentation of configuration
 
-To cover all this gcdt configuration usecases we decided to use the `openapi` specification. Using openapi alows us to build on existing workflows and tooling. 
+To cover all this gcdt configuration usecases we decided to use the `openapi` specifications. Using openapi alows us to build on existing workflows and tooling. 
