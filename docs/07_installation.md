@@ -174,8 +174,10 @@ Detailed information on [Version Identification and Dependency Specification](ht
 
 ##### v 0.2.x removed long deprecated hook mechanism
 
-No more 'pre_hook', 'pre_create_hook', 'pre_update_hook', 'post_create_hook', 'post_update_hook', 'post_hook' any more.
+Removed long deprecated hook support from both kumo and tenkai. No more 'pre_hook', 'pre_create_hook', 'pre_update_hook', 'post_create_hook', 'post_update_hook', 'post_hook' any more.
 
+[kumo lifecycle hooks](http://gcdt.readthedocs.io/en/latest/20_kumo.html#kumo-lifecycle-hooks)
+[using hooks in gcdt](http://gcdt.readthedocs.io/en/latest/60_faq.html#using-hooks-in-gcdt)
 [list of available hooks to use](http://gcdt.readthedocs.io/en/latest/gcdt_plugins/15_plugin_mechanism.html#list-of-gcdt-signals)
 
 ##### with v 0.2.x you explicitly need to install all used gcdt tools
@@ -185,7 +187,6 @@ You need to install gcdt-tools (gcdt-kumo, gcdt-tenkai, gcdt-ramuda, gcdt-yugen)
 ##### with v 0.2.x we remove the deprecated ami lookup
 
 Newer glomex `base_ami` uses a different naming scheme. Consequently the ami lookup implemented in gcdt provides you with old base_ami ids. Current working mode is to put the ami id into credstash (key: 'ops.dev.base_ami').
-
 
 ##### with v 0.2.x we moved cloudformation helpers to gcdt_kumo
 
