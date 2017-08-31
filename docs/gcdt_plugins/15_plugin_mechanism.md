@@ -79,6 +79,8 @@ The list of gcdt signals you can use in plugins or hooks:
 * initialized - after reading arguments and context
 * config_read_init
 * config_read_finalized
+* check_credentials_init
+* check_credentials_finalized
 * lookup_init
 * lookup_finalized
 * config_validation_init
