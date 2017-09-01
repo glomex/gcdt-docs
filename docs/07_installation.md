@@ -174,7 +174,9 @@ Detailed information on [Version Identification and Dependency Specification](ht
 
 ##### v 0.2.x removed long deprecated hook mechanism
 
-Removed long deprecated hook support from both kumo and tenkai. No more 'pre_hook', 'pre_create_hook', 'pre_update_hook', 'post_create_hook', 'post_update_hook', 'post_hook' any more.
+Removed long deprecated hook support from kumo, tenkai and ramuda. No more 'pre_bundle', 'pre_hook', 'pre_create_hook', 'pre_update_hook', 'post_create_hook', 'post_update_hook', 'post_hook' any more.
+
+Please use the gcdt lifecycle hook mechanism instead:
 
 [kumo lifecycle hooks](http://gcdt.readthedocs.io/en/latest/20_kumo.html#kumo-lifecycle-hooks)
 [using hooks in gcdt](http://gcdt.readthedocs.io/en/latest/60_faq.html#using-hooks-in-gcdt)
@@ -191,6 +193,19 @@ Newer glomex `base_ami` uses a different naming scheme. Consequently the ami loo
 ##### with v 0.2.x we moved cloudformation helpers to gcdt_kumo
 
 If you use `iam` and `route53` helpers you need to change imports for these submodules from `gcdt` to `gcdt_kumo`.
+
+##### with v 0.2.x we introduce config validation for all gcdt tools and plugins
+
+The new config validation looks for required properties and does format checks in some cases. gcdt now also validates datatypes. We found some errors where `string type` was uses in existing configurations instead of the correct `integer type` and you need to fix this before your configuration can pass as valid:
+
+A sample for a valid use of integer values:
+``` js
+"lambda": {
+  ...
+  "memorySize": 128,
+  "timeout": 15,
+}
+```  
 
 
 #### Updating gcdt from 0.0.x to 0.1.x
