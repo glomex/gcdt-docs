@@ -391,6 +391,35 @@ Kinesis is slightly different as it is not event-based but pulling from a stream
 }]
 ```
 
+Lambda@Edge needs a CloudFront event trigger.
+
+``` js
+...
+"events": [{
+    "event_source": {
+        "arn": "arn:aws:cloudfront::420189626185:distribution/E1V934UN4EJGJA",
+        "cache_behavior": "*",
+        "cloudfront_event": "origin-request"
+    }
+}]
+```
+
+
+TODO pattern for ECS
+
+
+### Deploying AWS Lambda@Edge
+
+AWS Lambda@Edge is relatively new so we have to deal with some (hopefully temporary) limitations (like it is only available in Virginia):
+
+* can not use artifact bucket for upload
+* max memory use 128 MB
+* max timeout 3 seconds for 'origin request' and 'origin response' events; for 'viewer request' and 'viewer response' events timeout is 1 second
+* lambda@edge does not implement ALIAS or $LATEST so we use the version-nbr of the last published version of the lambda function for wiring
+* unwire removes the lambda trigger for the configured CloudFront distribution (regardless if the lambda function is the same as the configured one or not)
+* 'ramuda wire' and 'ramuda unwire' finish after initiation of the replication to CloudFront. This means CloudFront distribution is in state "Pending" when ramuda exits.
+* you cannot delete lambda functions that have been replicated to CloudFront edge locations
+
 
 ### Setting the ENV variable
 
