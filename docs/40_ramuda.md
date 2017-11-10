@@ -449,6 +449,20 @@ Sample CloudWatch event pattern (ECS container instance state change):
 ],
 ```
 
+The request for AWS Lambda triggers for SQS came up a few times. This is NOT directly supported by AWS since SQS was released ~10 years earlier than AWS Lambda. But there are a different workarounds available - choose whatever is most appropriate for your situation:
+
+If you don't need near real-time processing, two valid options are:
+
+* Create CloudWatch Event Rule that will trigger the Lambda function every N minutes (e.g. every minute).
+* Create CloudWatch alarm watching ApproximateNumberOfMessagesVisible parameter for your SQS queue. This alarm should publish to an SNS topic, which in turn will trigger Lambda function.
+
+Possible real-time solutions:
+
+* Replace SQS queue with Kinesis or DynamoDB. Both can trigger Lambda functions on updates.
+* Inject SNS before SQS. SNS can add items to SQS and trigger Lambda function.
+
+[more details on SQS triggers](https://stackoverflow.com/questions/41137487/trigger-lambda-function-in-aws-when-the-message-is-present-in-sqs-queue)
+
 
 ### Deploying AWS Lambda@Edge
 
