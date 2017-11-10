@@ -391,7 +391,7 @@ Kinesis is slightly different as it is not event-based but pulling from a stream
 }]
 ```
 
-Lambda@Edge needs a CloudFront event trigger.
+Lambda@Edge needs a CloudFront event trigger:
 
 ``` js
 ...
@@ -405,7 +405,49 @@ Lambda@Edge needs a CloudFront event trigger.
 ```
 
 
-TODO pattern for ECS
+Sample CloudWatch event pattern (parameter store change):
+
+``` js
+  ...
+  "events": [
+    {
+      "event_source": {
+        "name": "ssm_parameter_changed",
+        "input_path": "$.detail",
+        "pattern": {
+          "source": [
+            "aws.ssm"
+          ],
+          "detail-type": [
+            "Parameter Store Change"
+          ]
+        }
+      }
+    }
+  ],
+```
+
+
+Sample CloudWatch event pattern (ECS container instance state change):
+
+``` js
+...
+"events": [
+  {
+    "event_source": {
+      "name": "ecs_container_instance_state_change",
+      "pattern": {
+        "source": [
+          "aws.ecs"
+        ],
+        "detail-type": [
+          "ECS Container Instance State Change"
+        ]
+      }
+    }
+  }
+],
+```
 
 
 ### Deploying AWS Lambda@Edge
