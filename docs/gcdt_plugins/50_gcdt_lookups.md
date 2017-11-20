@@ -12,18 +12,33 @@ The lookups functionality is pinned to a dedicated gcdt lifecycle step.
 
 The `stack` lookup is used to substitute configuration where the value is an output from another cloudformation stack.
 
-format: `lookup:stack:<stackname>:<output>`
-sample: `lookup:secret:slack.token`
+```eval_rst
++---------+-------------------------------------+
+| format: | `lookup:stack:<stackname>:<output>` |
++---------+-------------------------------------+
+| sample: | `lookup:secret:slack.webhook`       |
++---------+-------------------------------------+
+```
 
 regional lookup of stack output:
-format: `lookup:region:<region>:stack:<stackname>:<output>`
-sample: `lookup:region:us-east-1:secret:slack.token`
+```eval_rst
++---------+-----------------------------------------------------+
+| format: | `lookup:region:<region>:stack:<stackname>:<output>` |
++---------+-----------------------------------------------------+
+| sample: | `lookup:region:us-east-1:secret:slack.webhook`      |
++---------+-----------------------------------------------------+
+```
 
 
 ### DEPRECATED lookup ssl certificate
 
-format: `lookup:ssl:<stackname>:<output>`
-sample: `lookup:ssl:*.infra.glomex.cloud`
+```eval_rst
++---------+-----------------------------------------------------+
+| format: | `lookup:ssl:<stackname>:<output>`                   |
++---------+-----------------------------------------------------+
+| sample: | `lookup:ssl:*.infra.glomex.cloud`                   |
++---------+-----------------------------------------------------+
+```
 
 'ssl' lookup uses the `server_certificate` functionality built into AWS IAM. It is configured default lookup so for each stack also the certificates are added to stackdata.
 
@@ -32,8 +47,13 @@ This is DEPRECATED! If possible, please use the acm lookup!
 
 ### lookup acm certificate
 
-format: `lookup:acm:<name_1>:...:<name_n>:`
-sample: `lookup:acm:foo.mes.glomex.cloud:supercars.infra.glomex.cloud:*.dev.infra.glomex.cloud`
+```eval_rst
++---------+-----------------------------------------------------------------------------------------+
+| format: | `lookup:acm:<name_1>:...:<name_n>:`                                                     |
++---------+-----------------------------------------------------------------------------------------+
+| sample: | `lookup:acm:foo.mes.glomex.cloud:supercars.infra.glomex.cloud:*.dev.infra.glomex.cloud` |
++---------+-----------------------------------------------------------------------------------------+
+```
 
 'acm' lookup uses the AWS ACM (Certificate Manager) functionality. It is configured as default lookup.
 
@@ -55,15 +75,29 @@ Note: if you use ACM lookup in yugen / API Gateway you need to deploy the certif
 The `secret` lookup is used to substitute configuration where the value is a password, token or other sensitive information that you can not commit to a repository.  
  
 lookup the 'datadog_api_key' entry from credstash:
-format: `lookup:secret:<name>.<subname>`
-sample: `lookup:secret:datadog.api_key`
+```eval_rst
++---------+-----------------------------------------------------+
+| format: | `lookup:secret:<name>.<subname>`                    |
++---------+-----------------------------------------------------+
+| sample: | `lookup:secret:datadog.api_key`                     |
++---------+-----------------------------------------------------+
+```
 
 regional lookup of secret:
-format: `lookup:region:<region>:secret:<name>.<subname>`
-sample: `lookup:region:us-east-1:secret:datadog.api_key`
+```eval_rst
++---------+-----------------------------------------------------+
+| format: | `lookup:region:<region>:secret:<name>.<subname>`    |
++---------+-----------------------------------------------------+
+| sample: | `lookup:region:us-east-1:secret:datadog.api_key`    |
++---------+-----------------------------------------------------+
+```
 
 lookup the 'slack.webhook' entry from credstash:
-sample: `lookup:secret:slack.webhook:CONTINUE_IF_NOT_FOUND`
+```eval_rst
++---------+-----------------------------------------------------+
+| sample: | `lookup:secret:slack.webhook:CONTINUE_IF_NOT_FOUND` |
++---------+-----------------------------------------------------+
+```
 
 note that the `slack.webhook` lookup does not fail it the accounts credstash does not have the `slack.token` entry.
 
