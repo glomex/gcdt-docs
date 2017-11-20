@@ -1,6 +1,6 @@
 ## gcdt-lookups plugin
 
-The lookups functionality was previously part of the hocon config reader. The lookup functionality was refactored into this `gcdt-lookups` plugin and with the refactoring we also pinned the functionality it into a dedicated lifecycle step. 
+The lookups functionality is pinned to a dedicated gcdt lifecycle step. 
 
 
 ### Related documents
@@ -14,6 +14,10 @@ The `stack` lookup is used to substitute configuration where the value is an out
 
 format: `lookup:stack:<stackname>:<output>`
 sample: `lookup:secret:slack.token`
+
+regional lookup of stack output:
+format: `lookup:region:<region>:stack:<stackname>:<output>`
+sample: `lookup:region:us-east-1:secret:slack.token`
 
 
 ### DEPRECATED lookup ssl certificate
@@ -50,13 +54,18 @@ Note: if you use ACM lookup in yugen / API Gateway you need to deploy the certif
 
 The `secret` lookup is used to substitute configuration where the value is a password, token or other sensitive information that you can not commit to a repository.  
  
+lookup the 'datadog_api_key' entry from credstash:
 format: `lookup:secret:<name>.<subname>`
 sample: `lookup:secret:datadog.api_key`
-lookup the 'datadog_api_key' entry from credstash
-sample: `lookup:secret:slack.webhook:CONTINUE_IF_NOT_FOUND`
-lookup the 'slack.token' entry from credstash
 
-note that the `slack.token` lookup does not fail it the accounts credstash does not have the `slack.token` entry.
+regional lookup of secret:
+format: `lookup:region:<region>:secret:<name>.<subname>`
+sample: `lookup:region:us-east-1:secret:datadog.api_key`
+
+lookup the 'slack.webhook' entry from credstash:
+sample: `lookup:secret:slack.webhook:CONTINUE_IF_NOT_FOUND`
+
+note that the `slack.webhook` lookup does not fail it the accounts credstash does not have the `slack.token` entry.
 
 
 ### DEPRECATED lookup baseami
