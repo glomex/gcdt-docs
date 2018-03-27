@@ -104,7 +104,8 @@ Currently the certificates need to be deployed in `us-east-1` and used in the `c
   "certificateArn": "lookup:acm:*.infra.glomex.cloud",
   "domainName": "unittest-gcdt-sample-api-dev-eu-west-1.dev.mes.glomex.cloud",
   "hostedDomainZoneId": "lookup:stack:infra-dev:internalDomainHostedZoneID",
-  "route53Record": "unittest-gcdt-sample-api-dev-eu-west-1.dev.infra.glomex.cloud"
+  "route53Record": "unittest-gcdt-sample-api-dev-eu-west-1.dev.infra.glomex.cloud",
+  "ensureCname": true
 }
 ```
 
