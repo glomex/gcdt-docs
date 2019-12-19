@@ -76,7 +76,6 @@ The gcdt `context` is the "internal" datastructure gcdt is using to process the 
     'gcdt-say-hello',
     'glomex-config-reader',
     'gcdt-slack-integration',
-    'glomex-checks',
     'gcdt-gru',
     'gcdt-datadog-integration',
     'gcdt-lookups'
